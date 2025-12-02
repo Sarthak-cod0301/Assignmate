@@ -1,0 +1,31 @@
+.App {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.card {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.assignment-card {
+  transition: transform 0.2s;
+  height: 100%;
+}
+
+.assignment-card:hover {
+  transform: translateY(-2px);
+}
+
+.file-button {
+  margin: 2px;
+}
+
+#root {
+  min-height: 100vh;
+}
