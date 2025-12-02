@@ -13,11 +13,6 @@ app.use(cors());
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Home route (fix for "Cannot GET /")
-app.get('/', (req, res) => {
-  res.send("Backend is running successfully! 🚀");
-});
-
 // Routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/assignments', require('./routes/assignments'));
@@ -36,7 +31,6 @@ mongoose.connect(process.env.MONGODB_URI, {
 .then(() => console.log('Connected to MongoDB'))
 .catch(err => console.error('MongoDB connection error:', err));
 
-// Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
