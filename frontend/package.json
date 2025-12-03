@@ -1,7 +1,8 @@
 {
   "name": "assignamate-frontend",
   "version": "1.0.0",
-  "description": "Frontend for Assignamate - Student Assignment Submission System",
+  "private": true,
+  "homepage": ".",
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
