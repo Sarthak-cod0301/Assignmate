@@ -1,10 +1,54 @@
 import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+// Detect environment
+const isDevelopment = process.env.NODE_ENV === 'development';
+
+// Set API URL based on environment
+const API_URL = isDevelopment 
+  ? 'http://localhost:5000/api'  // Local development
+  : '/api';                       // Production (same origin)
+
+console.log(`🌍 API URL: ${API_URL}`);
+console.log(`🏭 Environment: ${process.env.NODE_ENV}`);
 
 const api = axios.create({
   baseURL: API_URL,
+  timeout: 10000, // 10 second timeout
 });
+
+// Request interceptor
+api.interceptors.request.use(
+  (config) => {
+    console.log(`📤 ${config.method.toUpperCase()} ${config.url}`);
+    return config;
+  },
+  (error) => {
+    console.error('❌ Request error:', error);
+    return Promise.reject(error);
+  }
+);
+
+// Response interceptor
+api.interceptors.response.use(
+  (response) => {
+    console.log(`✅ ${response.status} ${response.config.url}`);
+    return response;
+  },
+  (error) => {
+    console.error('❌ Response error:', {
+      url: error.config?.url,
+      status: error.response?.status,
+      message: error.message
+    });
+    
+    if (error.response?.status === 401) {
+      localStorage.removeItem('user');
+      window.location.href = '/login';
+    }
+    
+    return Promise.reject(error);
+  }
+);
 
 export const authAPI = {
   login: (credentials) => api.post('/auth/login', credentials),
