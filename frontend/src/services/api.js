@@ -5,7 +5,7 @@ const isDevelopment = process.env.NODE_ENV === 'development';
 
 // Set API URL based on environment
 const API_URL = isDevelopment 
-  ? 'http://localhost:5000/api'  // Local development
+  ? 'https://assignamate-backend.onrender.com/api'  // Local development
   : '/api';                       // Production (same origin)
 
 console.log(`🌍 API URL: ${API_URL}`);
