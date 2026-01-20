@@ -159,7 +159,7 @@ const Assignments = () => {
 
   const viewQuestionFile = (assignment) => {
     if (assignment.questionFile) {
-      const fileUrl = `http://localhost:5000/uploads/${assignment.questionFile.filename}`;
+      const fileUrl = `https://assignmate-backend-76bd.onrender.com/uploads/${assignment.questionFile.filename}`;
       window.open(fileUrl, '_blank');
     }
   };
