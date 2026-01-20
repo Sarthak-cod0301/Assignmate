@@ -7,6 +7,9 @@ const path = require('path');
 dotenv.config();
 
 const app = express();
+app.get("/", (req, res) => {
+  res.send("Backend is running!");
+});
 
 // Middleware
 app.use(cors());
@@ -24,16 +27,12 @@ app.get('/api/test', (req, res) => {
 });
 
 // Database connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/assignamate', {
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-});
-
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', () => {
-  console.log('Connected to MongoDB');
-});
+})
+.then(() => console.log('Connected to MongoDB'))
+.catch(err => console.error('MongoDB connection error:', err));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
